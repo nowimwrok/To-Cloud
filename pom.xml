@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.wizzer</groupId>
-    <artifactId>to-cloud</artifactId>
+    <artifactId>to-Mall</artifactId>
     <version>4.0.1-SNAPSHOT</version>
     <modules>
         <module>wk-framework</module>
         <module>wk-app</module>
     </modules>
     <packaging>pom</packaging>
-    <name>To-Cloud</name>
+    <name>To-Mall</name>
     <url>http://www.tu-iCloud.cn</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
