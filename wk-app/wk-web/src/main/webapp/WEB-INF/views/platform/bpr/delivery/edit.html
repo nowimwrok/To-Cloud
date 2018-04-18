@@ -1,0 +1,266 @@
+<%
+layout("/layouts/platform.html"){
+%>
+<header class="header navbar bg-white shadow">
+    <div class="btn-group tool-button">
+        <a class="btn btn-primary navbar-btn" href="${base}/platform/bpr/delivery" id="goBack" data-pjax><i class="ti-angle-left"></i>${msg['globals.button.back']}</a>
+    </div>
+</header>
+
+<div class="content-wrap">
+    <div class="wrapper" style="min-height:500px;">
+        <section class="panel panel-form">
+            <form id="editForm" role="form" class="form-horizontal parsley-form" data-parsley-validate
+                  action="${base}/platform/bpr/delivery/editDo" method="post">
+                <input name="id" type="hidden" value="${obj.id}">
+                <div class="row mb10">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="unitid" class="col-sm-2 control-label">${msg['bpr.delivery.column.unitid']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="unitid" class="form-control" name="unitid" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.unitid']}" value="${obj.unitid}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="goodsId" class="col-sm-2 control-label">${msg['bpr.delivery.column.goodsId']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="goodsId" class="form-control" name="goodsId" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.goodsId']}" value="${obj.goodsId}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="parentId" class="col-sm-2 control-label">${msg['bpr.delivery.column.parentId']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="parentId" class="form-control" name="parentId" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.parentId']}" value="${obj.parentId}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="isChild" class="col-sm-2 control-label">${msg['bpr.delivery.column.isChild']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="isChild" class="form-control" name="isChild" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.isChild']}" value="${obj.isChild}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="deliveryNo" class="col-sm-2 control-label">${msg['bpr.delivery.column.deliveryNo']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="deliveryNo" class="form-control" name="deliveryNo" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.deliveryNo']}" value="${obj.deliveryNo}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="number" class="col-sm-2 control-label">${msg['bpr.delivery.column.number']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="number" class="form-control" name="number" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.number']}" value="${obj.number}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="surplusNumber" class="col-sm-2 control-label">${msg['bpr.delivery.column.surplusNumber']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="surplusNumber" class="form-control" name="surplusNumber" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.surplusNumber']}" value="${obj.surplusNumber}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="toalVolume" class="col-sm-2 control-label">${msg['bpr.delivery.column.toalVolume']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="toalVolume" class="form-control" name="toalVolume" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.toalVolume']}" value="${obj.toalVolume}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="surplusVolume" class="col-sm-2 control-label">${msg['bpr.delivery.column.surplusVolume']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="surplusVolume" class="form-control" name="surplusVolume" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.surplusVolume']}" value="${obj.surplusVolume}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="transVolume" class="col-sm-2 control-label">${msg['bpr.delivery.column.transVolume']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="transVolume" class="form-control" name="transVolume" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.transVolume']}" value="${obj.transVolume}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fromProvince" class="col-sm-2 control-label">${msg['bpr.delivery.column.fromProvince']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="fromProvince" class="form-control" name="fromProvince" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.fromProvince']}" value="${obj.fromProvince}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fromCity" class="col-sm-2 control-label">${msg['bpr.delivery.column.fromCity']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="fromCity" class="form-control" name="fromCity" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.fromCity']}" value="${obj.fromCity}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fromArea" class="col-sm-2 control-label">${msg['bpr.delivery.column.fromArea']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="fromArea" class="form-control" name="fromArea" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.fromArea']}" value="${obj.fromArea}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fromAddress" class="col-sm-2 control-label">${msg['bpr.delivery.column.fromAddress']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="fromAddress" class="form-control" name="fromAddress" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.fromAddress']}" value="${obj.fromAddress}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="toProvince" class="col-sm-2 control-label">${msg['bpr.delivery.column.toProvince']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="toProvince" class="form-control" name="toProvince" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.toProvince']}" value="${obj.toProvince}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="toCity" class="col-sm-2 control-label">${msg['bpr.delivery.column.toCity']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="toCity" class="form-control" name="toCity" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.toCity']}" value="${obj.toCity}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="toArea" class="col-sm-2 control-label">${msg['bpr.delivery.column.toArea']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="toArea" class="form-control" name="toArea" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.toArea']}" value="${obj.toArea}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="toAddress" class="col-sm-2 control-label">${msg['bpr.delivery.column.toAddress']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="toAddress" class="form-control" name="toAddress" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.toAddress']}" value="${obj.toAddress}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="shipper" class="col-sm-2 control-label">${msg['bpr.delivery.column.shipper']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="shipper" class="form-control" name="shipper" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.shipper']}" value="${obj.shipper}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="shipperPhone" class="col-sm-2 control-label">${msg['bpr.delivery.column.shipperPhone']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="shipperPhone" class="form-control" name="shipperPhone" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.shipperPhone']}" value="${obj.shipperPhone}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="carrier" class="col-sm-2 control-label">${msg['bpr.delivery.column.carrier']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="carrier" class="form-control" name="carrier" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.carrier']}" value="${obj.carrier}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="carrierPhone" class="col-sm-2 control-label">${msg['bpr.delivery.column.carrierPhone']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="carrierPhone" class="form-control" name="carrierPhone" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.carrierPhone']}" value="${obj.carrierPhone}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="status" class="col-sm-2 control-label">${msg['bpr.delivery.column.status']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="status" class="form-control" name="status" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.status']}" value="${obj.status}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pickUrl" class="col-sm-2 control-label">${msg['bpr.delivery.column.pickUrl']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="pickUrl" class="form-control" name="pickUrl" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.pickUrl']}" value="${obj.pickUrl}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="picTime" class="col-sm-2 control-label">${msg['bpr.delivery.column.picTime']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="picTime" class="form-control" name="picTime" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.picTime']}" value="${obj.picTime}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="unloadUrl" class="col-sm-2 control-label">${msg['bpr.delivery.column.unloadUrl']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="unloadUrl" class="form-control" name="unloadUrl" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.unloadUrl']}" value="${obj.unloadUrl}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="unloadTime" class="col-sm-2 control-label">${msg['bpr.delivery.column.unloadTime']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="unloadTime" class="form-control" name="unloadTime" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.unloadTime']}" value="${obj.unloadTime}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pickCode" class="col-sm-2 control-label">${msg['bpr.delivery.column.pickCode']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="pickCode" class="form-control" name="pickCode" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.pickCode']}" value="${obj.pickCode}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pickCodeImg" class="col-sm-2 control-label">${msg['bpr.delivery.column.pickCodeImg']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="pickCodeImg" class="form-control" name="pickCodeImg" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.pickCodeImg']}" value="${obj.pickCodeImg}" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="remarks" class="col-sm-2 control-label">${msg['bpr.delivery.column.remarks']}</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="remarks" class="form-control" name="remarks" data-parsley-required="true"
+                                       placeholder="${msg['bpr.delivery.column.remarks']}" value="${obj.remarks}" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <div class="form-group text-center">
+                        <label></label>
+
+                        <div>
+                            <button class="btn btn-primary btn-block btn-lg btn-parsley" data-loading-text="${msg['globals.button.submit.tip']}">${msg['globals.button.submit']}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+    </div>
+</div>
+<script language="JavaScript">
+    $(document).ready(function () {
+        $('#editForm').ajaxForm({
+            dataType: 'json',
+            beforeSubmit: function (arr, form, options) {
+                form.find("button:submit").button("loading");
+            },
+            success: function (data, statusText, xhr, form) {
+                if (data.code == 0) {
+                    Toast.success(data.msg);
+                    setTimeout(function () {
+                        $("#goBack").trigger("click");
+                    }, 1000);
+                } else {
+                    Toast.error(data.msg);
+                }
+                form.find("button:submit").button("reset");
+            }
+        });
+    });
+</script>
+<%}%>

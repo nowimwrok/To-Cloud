@@ -1,0 +1,304 @@
+<%
+layout("/layouts/platform.html"){
+%>
+<header class="header navbar bg-white shadow">
+    <div class="btn-group tool-button">
+        <a class="btn btn-primary navbar-btn" href="${base}/platform/bpr/goods" id="goBack" data-pjax><i
+                class="ti-angle-left"></i>${msg['globals.button.back']}</a>
+    </div>
+</header>
+
+<div class="content-wrap">
+    <div class="wrapper" style="min-height:500px;">
+        <section class="panel panel-form">
+            <form id="editForm" role="form" class="form-horizontal parsley-form" data-parsley-validate
+                  action="${base}/platform/bpr/order/editDo" method="post">
+                <input name="id" type="hidden" value="${obj.id}">
+                <div class="row mb10">
+                    <div class="col-lg-12">
+                        <div class="form-group  col-lg-6 has-feedback">
+                            <label for="parentId" class="col-sm-4 control-label">所属单位</label>
+
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input id="parentId" type="text" class="form-control" placeholder="选择单位" disabled
+                                           value="${obj.userUnit.name}" data-parsley-required="true"/>
+
+                                    <span class="input-group-btn">
+			                             			<button type="button"
+                                                            class="btn btn-primary <%if(!@shiro.hasRole('sysadmin')){%>disabled<%}%>"
+                                                            data-toggle="modal"
+                                                            data-target="#dialogSelectParentUnit"><i
+                                                            class="ti-plus"></i>选择
+                                                    </button>
+			                             		</span>
+                                </div>
+                                <input type="hidden" name="unitid" value="${obj.unitid!}">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label for="price" class="col-sm-2 control-label">订单单价</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input type="text" id="price" class="form-control" name="price"
+                                           data-parsley-required="true"
+                                           placeholder="请输入订单单价" value="0.00">
+                                    <span class="input-group-addon">
+			                             			元
+			                             		</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label for="vloume" class="col-sm-4 control-label">运量</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input type="text" id="vloume" class="form-control" name="vloume"
+                                           data-parsley-required="true"
+                                           placeholder="运量" value="0.00">
+                                    <span class="input-group-addon">吨</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label for="batch" class="col-sm-2 control-label">运费</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input type="text" id="batch" class="form-control" name="batch"
+                                           data-parsley-required="true"
+                                           placeholder="${msg['bpr.goods.column.batch']}" value="${obj.batch}">
+                                    <span class="input-group-addon">元</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label for="payWay" class="col-sm-4 control-label">支付方式</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="payWay" id="payway">
+                                    <option value="article">线上</option>
+                                    <option value="photo">线下</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label for="onlinePay" class="col-sm-2 control-label">线上支付</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="onlinePay" class="form-control" name="onlinePay"
+                                       data-parsley-required="true"
+                                       placeholder="${msg['bpr.goods.column.weight']}" value="${obj.weight}">
+                            </div>
+                        </div>
+                        <div class="form-group  col-lg-6">
+                            <label for="number" class="col-sm-4 control-label">是否预付</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="number" class="form-control" name="number"
+                                       data-parsley-required="true"
+                                       placeholder="${msg['bpr.goods.column.number']}" value="${obj.number}">
+                            </div>
+                        </div>
+                        <div class="form-group  col-lg-6">
+                            <label for="toalVolume"
+                                   class="col-sm-2 control-label">预付金额</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="toalVolume" class="form-control" name="toalVolume"
+                                       data-parsley-required="true"
+                                       placeholder="${msg['bpr.goods.column.toalVolume']}" value="${obj.toalVolume}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class=panel-body style="padding-top: 50px;">
+                        <div class="table-responsive no-border">
+                            <table class="table table-bordered table-striped mg-t datatable">
+                                <thead>
+                                <tr>
+                                    <th>所属单位<!--${msg['bpr.goods.column.unitid']}--></th>
+                                    <th>${msg['bpr.goods.column.goodsname']}</th>
+                                    <th>${msg['bpr.goods.column.warehouse']}</th>
+                                    <th>${msg['bpr.goods.column.batch']}</th>
+                                    <!--<th>${msg['bpr.goods.column.spec']}</th>-->
+                                    <!--<th>${msg['bpr.goods.column.weight']}</th>-->
+                                    <th>${msg['bpr.goods.column.number']}</th>
+                                    <th>剩余数量</th>
+                                    <th>${msg['bpr.goods.column.toalVolume']}</th>
+                                    <th>${msg['bpr.goods.column.surplusVolume']}</th>
+                                    <th>${msg['bpr.goods.column.transVolume']}</th>
+                                    <!--<th>${msg['bpr.goods.column.unit']}</th>-->
+                                    <!--<th>${msg['bpr.goods.column.texture']}</th>-->
+                                    <th>${msg['bpr.goods.column.type']}</th>
+                                    <th>${msg['bpr.goods.column.status']}</th>
+                                    <!--<th>${msg['bpr.goods.column.remarks']}</th>-->
+                                    <th>${msg['globals.table.column.operation']}</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <div class="form-group text-center">
+                        <label></label>
+
+                        <div>
+                            <button class="btn btn-primary btn-block btn-lg btn-parsley"
+                                    data-loading-text="${msg['globals.button.submit.tip']}">
+                                ${msg['globals.button.submit']}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+    </div>
+</div>
+<!-- 选择上级单位 -->
+<div id="dialogSelectParentUnit" class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">选择上级单位</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div id="jsTreeParentUnit" class="demo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                <button type="button" class="btn btn-primary" onclick="selectParentMenu()">确认选择</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script language="JavaScript">
+
+    var datatable;
+    function initDatatable() {
+        datatable = $('.datatable').DataTable({
+            "dom": '<"toolbar">frtip',
+            "searching":false,
+            "processing": false,
+            "serverSide": true,
+            "select": true,
+            "ordering": true,
+            "language": {
+                "url": "${base}/assets/plugins/datatables/${lang}.json"
+            },
+            "preDrawCallback": function () {
+                sublime.showLoadingbar($(".main-content"));
+            },
+            "drawCallback": function () {
+                sublime.closeLoadingbar($(".main-content"));
+            },
+            "ajax": {
+                "url": "${base}/platform/bpr/goods/data",
+                "type": "post",
+                "data": function (d) {
+
+                }
+            },
+            "order": [[1, "desc"]],
+            "columns": [
+                {"data": "userUnit.name", "bSortable": false},
+                {"data": "goodsname", "bSortable": true},
+                {"data": "warehouse", "bSortable": true},
+                {"data": "batch", "bSortable": true},
+                /*{"data": "spec", "bSortable": true},*/
+                /*{"data": "weight", "bSortable": true},*/
+                {"data": "number", "bSortable": true},
+                {"data": "surplusNumber", "bSortable": true},
+                {"data": "toalVolume", "bSortable": true},
+                {"data": "surplusVolume", "bSortable": true},
+                {"data": "transVolume", "bSortable": true},
+                /*{"data": "unit", "bSortable": true},*/
+                /*{"data": "texture", "bSortable": true},*/
+                {"data": "type", "bSortable": true},
+                {"data": "status", "bSortable": true},
+                /*{"data": "remarks", "bSortable": true},*/
+            ],
+            "columnDefs": [
+                {
+                    "render": function (data, type, row) {
+                        return '<div class="btn-group"><button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">' +
+                            ' <i class="ti-settings"></i> <span class="ti-angle-down"></span></button><ul class="dropdown-menu" role="menu">' +
+                            '<li><a href="${base}/platform/bpr/goods/detail/' + row.id + '" data-toggle="modal" data-target="#dialogDetail">${msg["globals.button.detail"]}</a></li>' +
+                            '<li><a href="${base}/platform/bpr/goods/edit/' + row.id + '" data-pjax>${msg["globals.button.update"]}</a></li>' +
+                            '<li><a href="${base}/platform/bpr/goods/dispatch/' + row.id + '" data-pjax>调度</a></li>' +
+                            '<li class="divider"></li>' +
+                            '<li><a href="javascript:;" onclick="del(\'' + row.id + '\')">${msg["globals.button.delete"]}</a></li>' +
+                            '</ul></div>';
+                    },
+                    "targets": 11
+                },
+                {
+                    "render": function (data, type, row) {
+                        if (row.toalVolume){
+                            return row.toalVolume+row.unit;
+                        }
+                        return "";
+                    },
+                    "targets": 6
+                }
+            ]
+        });
+        datatable.on('click', 'tr', function () {
+            $(this).toggleClass('selected');
+        });
+        $("#searchBtn").on('click', function () {
+            datatable.ajax.reload();
+        });
+    }
+    function initTreeView() {
+        $("#jsTreeParentUnit").jstree({
+            plugins: ["wholerow", "json_data"],
+            core: {
+                data: {
+                    dataType: "json",
+                    url: function (node) {
+                        return node.id === "#" ? "${base}/platform/sys/user/tree" : "${base}/platform/sys/user/tree?pid=" + node.id
+                    }
+                },
+                multiple: false
+            }
+        }).on("dblclick.jstree", function (node) {
+            selectParentMenu();
+        });
+    }
+
+    //选择父菜单
+    function selectParentMenu() {
+        var tree = $.jstree.reference("#jsTreeParentUnit");
+        var node = tree.get_selected(true);
+        $("#editForm #parentId").val(node[0].text);
+        $("#editForm input[name='unitid']").val(node[0].id);
+        $("#dialogSelectParentUnit").modal("hide");
+    }
+
+    $(document).ready(function () {
+        initTreeView();
+        initDatatable();
+        $('#editForm').ajaxForm({
+            dataType: 'json',
+            beforeSubmit: function (arr, form, options) {
+                form.find("button:submit").button("loading");
+            },
+            success: function (data, statusText, xhr, form) {
+                if (data.code == 0) {
+                    Toast.success(data.msg);
+                    setTimeout(function () {
+                        $("#goBack").trigger("click");
+                    }, 1000);
+                } else {
+                    Toast.error(data.msg);
+                }
+                form.find("button:submit").button("reset");
+            }
+        });
+    });
+</script>
+<%}%>
